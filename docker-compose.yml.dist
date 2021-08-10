@@ -1,0 +1,102 @@
+version: "3"
+
+services:
+  web:
+    build: ./.docker/web
+    networks:
+      - default
+      - traefik
+    ports:
+      - 80
+    volumes:
+      - ./app:/var/www/
+      - ./.docker/web/vhosts:/etc/apache2/sites-enabled
+    labels:
+      traefik.frontend.rule: "Host:weareavengers.test"
+      traefik.docker.network: traefik
+
+  db:
+    image: mysql
+    networks:
+      - default
+      - traefik
+    restart: always
+    volumes:
+      - db-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: weareavengers
+    labels:
+      traefik.frontend.rule: "Host:db.weareavengers.test"
+      traefik.docker.network: traefik
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    depends_on:
+      - db
+    ports:
+      - 8080
+    environment:
+      PMA_HOST: db
+    networks:
+      - default
+      - traefik
+    labels:
+      traefik.frontend.rule: "Host:pma.weareavengers.test"
+      traefik.docker.network: traefik
+
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - 1025 # smtp server
+      - 8025 # web ui
+    networks:
+      - default
+      - traefik
+    labels:
+      traefik.frontend.rule: "Host:mail.weareavengers.test"
+      traefik.docker.network: traefik
+      traefik.port: 8025
+
+  composer:
+    networks:
+      - default
+      - traefik
+    build: ./.docker/web/
+    volumes:
+      - ./app:/var/www
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - $HOME/.ssh/known_hosts:/etc/ssh/ssh_known_hosts
+      - $HOME/.composer:/root/.composer
+    working_dir: /var/www
+    environment:
+      SSH_AUTH_SOCK: /ssh-agent
+    entrypoint: /usr/local/bin/composer
+
+  symfony:
+    networks:
+      - default
+      - traefik
+    build: ./.docker/web/
+    volumes:
+      - ./app:/var/www
+    working_dir: /var/www
+    entrypoint: /var/www/bin/console
+
+  phpunit:
+    networks:
+      - default
+      - traefik
+    build: ./.docker/web/
+    volumes:
+      - ./app:/var/www
+      - $HOME/.composer:/root/.composer
+    working_dir: /var/www
+    entrypoint: /var/www/vendor/bin/simple-phpunit
+
+volumes:
+  db-data:
+
+networks:
+  traefik:
+    external: true
