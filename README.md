@@ -22,4 +22,12 @@ make install
 make db
 ```
 
-4. Have fun !
+5. Have fun !
+
+
+## Start project
+
+Run 
+```make start```
+
+Go to http://weareavengers.test/
