@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nos Avengers{% endblock %}
+
+{% block body %}
+    <div class="container">
+      <section class="hero is-medium is-link mb-5">
+        <div class="hero-body">
+          <div class="columns">
+            <div class="column is-two-thirds">
+              <p class="subtitle">
+                Le grand chouchou du moment c'est...
+              </p>
+              <p class="title">
+                {{ favoriteAvenger.name }}, avec {{ favoriteAvenger.votesCount }} votes ! </p>
+              <i class="material-icons">favorite</i>
+              <i class="material-icons">favorite</i>
+              <i class="material-icons">favorite</i>
+            </div>
+            <div class="column">
+              Un ptit graphique ici ce serait sympa...<br>
+              <i class="material-icons">trending_up</i>
+              <i class="material-icons">favorite</i>
+              <i class="material-icons">lightbulb</i>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+        <div class="columns">
+            {% for avenger in avengers %}
+                <div class="column is-one-third">
+                  <div class="card">
+                    <div class="card-image">
+                      <figure class="image is-square">
+                        <img class="" src="{{ asset('build/' ~ avenger.picture) }}">
+                      </figure>
+                    </div>
+                    <div class="card-content">
+                      <div class="media">
+                        <div class="media-left">
+                          <figure class="image is-48x48">
+                            <img class="" src="{{ asset('build/' ~ avenger.picture) }}">
+                          </figure>
+                        </div>
+                        <div class="media-content">
+                          <p class="title is-4">{{ avenger.name }}</p>
+                          <p class="subtitle is-6">{{ avenger.realName }}</p>
+                        </div>
+                      </div>
+                      <div class="content">
+                        <p>Votes : {{ avenger.votesCount }}</p>
+                        <span class="material-icons material-icons-outlined has-text-warning">favorite</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+          {% if loop.index % 3 == 0 %}
+            </div>
+          <div class="columns">
+          {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

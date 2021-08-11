@@ -15,12 +15,23 @@ services:
       traefik.frontend.rule: "Host:weareavengers.test"
       traefik.docker.network: traefik
 
+  npm:
+    build: ./.docker/web
+    command: --help
+    entrypoint: npm
+    tty: true
+    volumes:
+      - ./app:/var/www/
+      - $SSH_AUTH_SOCK:/ssh-agent
+      - $HOME/.ssh/known_hosts:/etc/ssh/ssh_known_hosts
+
   db:
     image: mysql
     networks:
       - default
       - traefik
     restart: always
+    container_name: avengersdb
     volumes:
       - db-data:/var/lib/mysql
     environment:
@@ -37,7 +48,7 @@ services:
     ports:
       - 8080
     environment:
-      PMA_HOST: db
+      PMA_HOST: avengersdb
     networks:
       - default
       - traefik

@@ -17,4 +17,9 @@ dc build
 make install
 ```
 
+4. Init db
+```bash
+make db
+```
+
 4. Have fun !

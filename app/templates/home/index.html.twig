@@ -1,0 +1,97 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <section class="hero has-background-light	mb-6">
+            <div class="hero-body">
+                <p class="title mb-6">
+                    Hello Avengers !
+                </p>
+                <p class="subtitle">
+                    Bienvenue sur cette démo de Symfony UX (Turbo) !<br><br>
+                    Ce site a besoin de tes talents de développeurs pour ajouter de nouvelles fonctionnalités qui lui redonneraient un peu de vie et d'interactivité !<br>
+                    Pas besoin d'expertise en front : Ici ce sera juste Symfony, et TOI !<br>
+                    <br>
+                    Tes missions, si tu les acceptes, seront donc les suivantes...
+                </p>
+            </div>
+        </section>
+
+        <div class="columns">
+            <div class="column">
+                <article class="message is-link">
+                    <div class="message-header">
+                        <p>Bouton de vote</p>
+                    </div>
+                    <div class="message-body">
+                        <p class="subtitle">Créer un bouton Like sur chaque vignette, qui permet d'augmenter le nombre de like pour un Avenger préféré.</p>
+                        <strong>EN TANT QUE</strong> utilisateur fan absolu des Avengers<br>
+                        <strong>LORSQUE</strong> je clique sur un bouton sur un Avenger de la liste<br>
+                        <strong>JE PEUX</strong> augmenter le nombre de votes pour un ou plusieurs avengers de mon choix.<br>
+                    </div>
+                </article>
+            </div>
+            <div class="column">
+                <article class="message is-link">
+                    <div class="message-header">
+                        <p>Graphique des votes</p>
+                    </div>
+                    <div class="message-body">
+                        <p class="subtitle">Créer un graphique permettant de voir la répartition des votes entre chaque Avenger</p>
+                        <strong>EN TANT QUE</strong> utilisateur fan absolu des avengers<br>
+                        <strong>LORSQUE</strong> je suis sur la liste des Avengers<br>
+                        <strong>JE PEUX</strong> avoir un graphique qui remonte l'Avenger favori du moment<br>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
+                <article class="message is-link">
+                    <div class="message-header">
+                        <p>Discussion / Chat</p>
+                    </div>
+                    <div class="message-body">
+                        <p class="subtitle">Créer une page "Discussion" permettant de discuter en tant réel.</p>
+                        <strong>EN TANT QUE</strong> utilisateur fan absolu des Avengers<br>
+                        <strong>LORSQUE</strong> je clique sur le bouton Discussion<br>
+                        <strong>JE PEUX</strong> accéder à une page de discussion où je peux saisir et envoyer des messages, et lire la conversation en temps réel.<br>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <hr>
+        <div class="columns mt-5">
+            <div class="column">
+                <img src="{{ asset('build/thumbs-up-ok.gif') }}">
+            </div>
+            <div class="column">
+                <div class="mb-5 content">
+                    <h2 class="title">
+                        Avec un peu de doc, tout ira bien. <3
+                    </h2>
+                    <ul>
+                        <li><a href="https://symfony.com/blog/new-in-symfony-the-ux-initiative-a-new-javascript-ecosystem-for-symfony">Article de présentation de Symfony UX, par Titouan Galopin</a> sur le blog Symfony</li>
+                        <li><a href="https://github.com/symfony/ux">Le repo Git de Symfony UX</a> pour avoir une idée des composants d'UI qui sont proposés</li>
+                        <li><a href="https://github.com/symfony/ux-chartjs">Le repo de UX Chartjs</a>, pour faire le graphique</li>
+                    </ul>
+
+                    <ul>
+                        <li><a href="https://github.com/symfony/ux-turbo">Symfony UX Turbo</a> : sera utile pour le chat</li>
+                    </ul>
+                    <ul>
+                        <li>Pour faire un peu de style si besoin, utiliser les classes détaillées dans la <a href="https://bulma.io/documentation/">doc du framework CSS Bulma</a></li>
+                        <li>Pour ajouter des icônes : voir <a href="https://fonts.google.com/icons?selected=Material+Icons">Material Icons</a> </li>
+                    </ul>
+
+                    <p>+ Pair, questions, etc.</p>
+                    <p class="subtitle">Bon courage !</p>
+                </div>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+{% endblock %}

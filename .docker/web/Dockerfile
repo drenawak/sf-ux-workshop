@@ -1,10 +1,6 @@
 FROM php:8.0.6-apache
 MAINTAINER Occitech <contact@occitech.fr>
 
-#Update base packages and sources
-RUN apt-get update
-
-#Install required packages
 RUN apt-get update \
    && apt-get install -y \
     locales \
@@ -17,6 +13,9 @@ RUN apt-get update \
     libzip-dev \
     libonig-dev \
     libxslt-dev
+
+RUN apt-get update \
+  && apt-get install -y npm
 
 #Get and move composer to binary folder
 RUN curl -sSk https://getcomposer.org/installer | php -- --disable-tls && \
